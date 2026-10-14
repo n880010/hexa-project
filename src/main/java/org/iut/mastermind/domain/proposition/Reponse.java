@@ -47,16 +47,13 @@ public class Reponse {
 
     // renvoie le statut du caractère (incorrect, mal placé, placé)
     private Lettre evaluationCaractere(char carCourant) {
-        if (estPresent(carCourant)) {
-            if (estPlace(carCourant)) {
+        if (estPlace(carCourant)) {
                 return Lettre.PLACEE;
-            } else {
-                return Lettre.NON_PLACEE;
+            } 
+        if (estPresent(carCourant)){
+            return Lettre.NON_PLACEE;
             }
-        }
-        else {
-            return Lettre.INCORRECTE;
-        }
+        return Lettre.INCORRECTE;
     }
 
     // vrai si le caractère est présent dans le mot secret
