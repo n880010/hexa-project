@@ -1,5 +1,6 @@
 package org.iut.mastermind.domain.partie;
 
+import org.iut.mastermind.domain.proposition.MotSecret;
 import org.iut.mastermind.domain.proposition.Reponse;
 
 public class Partie {
@@ -52,8 +53,7 @@ public class Partie {
         }
 
         // On compare la proposition au mot secret.
-        Reponse reponse = new Reponse(motADeviner);
-        reponse.compare(motPropose);
+        Reponse reponse = new MotSecret(motADeviner).compareProposition(motPropose);
 
         // Cette proposition compte comme un essai.
         nbEssais++;
