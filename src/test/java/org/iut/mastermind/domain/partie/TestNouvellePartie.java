@@ -1,23 +1,20 @@
 package org.iut.mastermind.domain.partie;
 
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import org.iut.mastermind.domain.Mastermind;
-import org.iut.mastermind.domain.tirage.MotsRepository;
-import org.iut.mastermind.domain.tirage.ServiceNombreAleatoire;
+import org.iut.mastermind.domain.tirage.ServiceTirageMot;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
+import static org.mockito.ArgumentMatchers.eq;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("Test si une nouvelle partie:")
@@ -27,9 +24,7 @@ public class TestNouvellePartie {
     @Mock
     private PartieRepository partieRepository;
     @Mock
-    private MotsRepository motsRepository;
-    @Mock
-    private ServiceNombreAleatoire nombreAleatoire;
+    private ServiceTirageMot serviceTirageMot;
     @InjectMocks
     private Mastermind mastermind;
 
@@ -53,13 +48,9 @@ public class TestNouvellePartie {
         var succes = mastermind.nouvellePartie(JOUEUR);
         assertThat(succes).isFalse();
     }
-    private void givenMotSelectionne(String motSelectionne) {
-        int motNumero = 2;
-        when(nombreAleatoire.next(anyInt()))
-                .thenReturn(motNumero);
-        when(motsRepository
-                .getMotByIndex(motNumero))
-                .thenReturn(motSelectionne);
+
+    private void givenMotSelectionne(String mot) {
+        when(serviceTirageMot.tirageMotAleatoire()).thenReturn(mot);
     }
 
     private Partie getPartieEnregistree() {
@@ -70,4 +61,3 @@ public class TestNouvellePartie {
         return partie;
     }
 }
-

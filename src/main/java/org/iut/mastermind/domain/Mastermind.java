@@ -7,17 +7,15 @@ import org.iut.mastermind.domain.partie.Partie;
 import org.iut.mastermind.domain.partie.PartieRepository;
 import org.iut.mastermind.domain.partie.ResultatPartie;
 import org.iut.mastermind.domain.proposition.Reponse;
-import org.iut.mastermind.domain.tirage.MotsRepository;
-import org.iut.mastermind.domain.tirage.ServiceNombreAleatoire;
 import org.iut.mastermind.domain.tirage.ServiceTirageMot;
 
 public class Mastermind {
     private final PartieRepository partieRepository;
     private final ServiceTirageMot serviceTirageMot;
 
-    public Mastermind(PartieRepository pr, MotsRepository mr, ServiceNombreAleatoire na) {
+    public Mastermind(PartieRepository pr, ServiceTirageMot st ) {
         this.partieRepository = pr;
-        this.serviceTirageMot = new ServiceTirageMot(mr, na);
+        this.serviceTirageMot = st;
     }
 
     // on récupère éventuellement la partie enregistrée pour le joueur
